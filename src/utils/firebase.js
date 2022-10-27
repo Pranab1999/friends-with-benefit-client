@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from 'firebase/database';
+import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // firebase auth services
@@ -7,19 +8,20 @@ import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendP
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCZ0KjFpw5HgRBFasiyQgJ9atDZaoVyVcc",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "friends-with-benefit-ed2fd.firebaseapp.com",
     projectId: "friends-with-benefit-ed2fd",
     storageBucket: "friends-with-benefit-ed2fd.appspot.com",
-    messagingSenderId: "62529401203",
-    appId: "1:62529401203:web:4db30e9d198ff03aa0d506",
-    measurementId: "G-K3YX1XXB8L"
+    messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+    appId:process.env.REACT_APP_API_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const firestoreDB = getFirestore(app);
 const auth = getAuth(app);
 const analytics = getAnalytics(app);
 

@@ -1,4 +1,5 @@
 import './App.scss';
+import './utils/firebase'
 
 function App() {
   return (
