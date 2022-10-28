@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from 'firebase/database';
-import { getFirestore } from "firebase/firestore";
+import { getFirestore , query, getDocs, collection, where,addDoc} from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // firebase auth services
-import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut,} from 'firebase/auth';
+import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -20,8 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const firestoreDB = getFirestore(app);
+const db = getFirestore(app);
 const auth = getAuth(app);
 const analytics = getAnalytics(app);
 
@@ -37,11 +36,48 @@ const logInWithEmailAndPassword = async (email, password) => {
 };
 
 // register with email and password
-const registerWithEmailAndPassword = async (firstName, lastName, fullName, email, phone, password, region, location, group, dob, subscription) => {
+const registerWithEmailAndPassword = async (tag,
+                                            firstName,
+                                            lastName,
+                                            phone,
+                                            email,
+                                            street,
+                                            suburb,
+                                            postcode,
+                                            gender,
+                                            age,
+                                            listen,
+                                            tagSource,
+                                            moreMusic,
+                                            newsletterSubscription,
+                                            offers,
+                                            password) => {
 
     try {
+
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
+
+        await addDoc(collection(db, 'fwb_entries'), {
+            uid: user.uid,
+            authProvider: 'local',
+            tag_number: parseInt(tag),
+            first_name: firstName,
+            last_name: lastName,
+            phone: phone,
+            age: age,
+            listen: listen,
+            music_more: moreMusic,
+            email: user.email,
+            tag_origin: tagSource,
+            gender: gender,
+            address: street,
+            suburb: suburb,
+            post_code: postcode,
+            newsletter: newsletterSubscription,
+            advertisers_offers : offers,
+        });
+
     } catch (err) {
         console.error(err);
         alert(err.message);

@@ -1,10 +1,20 @@
 import './App.scss';
-import './utils/firebase'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+
+// Components
+import Activate from "./components/Activate";
+import Account from "./components/Account";
 
 function App() {
   return (
     <div className="App">
-      <h1> Friends With Benefit </h1>
+        <Router>
+            <Routes>
+                <Route exact path='/' element={<Account />} />
+                <Route exact path='/activate-key' element={<Activate />} />
+            </Routes>
+        </Router>
     </div>
   );
 }
