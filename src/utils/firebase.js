@@ -1,10 +1,18 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from 'firebase/database';
-import { getFirestore , query, getDocs, collection, where,addDoc} from "firebase/firestore";
+import { getFirestore , query, getDocs, collection, where,addDoc, doc} from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // firebase auth services
-import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,sendPasswordResetEmail,signOut} from 'firebase/auth';
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    signOut,
+    updateEmail,
+    updateProfile,
+    updatePassword
+} from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -58,7 +66,7 @@ const registerWithEmailAndPassword = async (tag,
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
 
-        await addDoc(collection(db, 'fwb_entries'), {
+        const docRef = await addDoc(collection(db, 'fwb_entries'), {
             uid: user.uid,
             authProvider: 'local',
             tag_number: parseInt(tag),
@@ -78,13 +86,15 @@ const registerWithEmailAndPassword = async (tag,
             advertisers_offers : offers,
         });
 
+        console.log("Document written with ID: ", docRef.id);
+
     } catch (err) {
-        console.error(err);
+        console.error("Error adding document: ", err);
         alert(err.message);
     }
 };
 
-// incase of password needed
+// in case of password needed
 const sendPasswordReset = async (email) => {
     try {
         await sendPasswordResetEmail(auth, email);
@@ -94,6 +104,40 @@ const sendPasswordReset = async (email) => {
         alert(err.message);
     }
 };
+
+// update profile
+const updateUserProfile = (displayName, photoUrl) => {
+    updateProfile(auth.currentUser, {
+        displayName: displayName, photoURL: photoUrl
+    }).then(() => {
+        // Profile updated!
+        // ...
+    }).catch((error) => {
+        // An error occurred
+        // ...
+    });
+}
+
+// update user email
+const updateUserEmail = (newEmail) => {
+    updateEmail(auth.currentUser, newEmail).then(() => {
+        // Email updated!
+        // ...
+    }).catch((error) => {
+        // An error occurred
+        // ...
+    });
+}
+
+// update user password
+const updateUserPassword = (newPassword) => {
+    updatePassword(auth.currentUser, newPassword).then(() => {
+        // Update successful.
+    }).catch((error) => {
+        // An error occurred
+        // ...
+    });
+}
 
 // logout
 const logout = () => {
