@@ -53,7 +53,7 @@ const UpdateEmail = () => {
               <div>
                   <label>
                       New Email Address
-                      <input className={"new_email"} value={''} onChange={event => setNewUserEmail(event.target.value)}/>
+                      <input  type={'text'} className={"new_email"} value={newUserEmail} onChange={e => setNewUserEmail(e.target.value)}/>
                   </label>
               </div>
           </div>
