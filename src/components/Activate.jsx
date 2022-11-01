@@ -8,24 +8,6 @@ import "./Activate.scss";
 // Partials
 
 const Activate = () => {
-    const [tag, setTag] = useState(null);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [street, setStreet] = useState("");
-    const [suburb, setSuburb] = useState("");
-    const [postcode, setPostcode] = useState("");
-    const [gender, setGender] = useState("");
-    const [age, setAge] = useState("");
-    const [listen, setListen] = useState([]);
-    const [tagSource, setTagSource] = useState("");
-    const [moreMusic, setMoreMusic] = useState("");
-    const [newsletterSubscription, setNewsletterSubscription] = useState(false);
-    const [offers, setOffers] = useState(false);
-    const [password, setPassword] = useState("");
-    const [user, loading, error] = useAuthState(auth);
-
 
     const ageGroup = [
         {label: 'Under 10', value: 'under 10'},
@@ -49,6 +31,26 @@ const Activate = () => {
         'During the day',
         'At night'
     ];
+
+    const [tag, setTag] = useState(null);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [street, setStreet] = useState("");
+    const [suburb, setSuburb] = useState("");
+    const [postcode, setPostcode] = useState("");
+    const [gender, setGender] = useState("");
+    const [age, setAge] = useState("");
+    const [groupCheckState, setGroupCheckState] = useState(new Array(listenGroup.length).fill(false));
+    const [listen, setListen] = useState([]);
+    const [tagSource, setTagSource] = useState("");
+    const [moreMusic, setMoreMusic] = useState("");
+    const [newsletterSubscription, setNewsletterSubscription] = useState(false);
+    const [offers, setOffers] = useState(false);
+    const [password, setPassword] = useState("");
+    const [user, loading, error] = useAuthState(auth);
+
 
     // const navigate = useNavigate();
 
@@ -86,6 +88,26 @@ const Activate = () => {
     const onChangeAgeGroup = (event) => {
         setAge(event.target.value);
     }
+
+    const onListenGroupChange = (position) => {
+        const updatedCheckedState = groupCheckState.map((item, index) =>
+            index === position ? !item : item
+        );
+
+        let newListenGroup = [];
+
+        setGroupCheckState(updatedCheckedState);
+
+        updatedCheckedState.forEach(
+            ( currentState, index) => {
+                if (currentState === true) {
+                     newListenGroup.push(listenGroup[index]);
+                }
+            }
+        );
+
+        setListen(newListenGroup);
+    };
 
     return (
         <div className='register'>
@@ -166,14 +188,27 @@ const Activate = () => {
                         </>
                     )}
                 </div>
-                {/*<div onChange={onChangeListenGroup}>*/}
-                {/*    {listenGroup.map((object, i) =>*/}
-                {/*        <>*/}
-                {/*            <input type="checkbox" value={object} name="listen" checked={listen === object} />{object}*/}
-                {/*            <br />*/}
-                {/*        </>*/}
-                {/*    )}*/}
-                {/*</div>*/}
+                <div className="">
+                    {listenGroup.map(( name , index) => {
+                        return (
+                            <li key={index}>
+                                <div className="">
+                                    <div className="">
+                                        <input
+                                            type="checkbox"
+                                            id={`custom-checkbox-${index}`}
+                                            name={name}
+                                            value={name}
+                                            checked={groupCheckState[index]}
+                                            onChange={() => onListenGroupChange(index)}
+                                        />
+                                        <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                    </div>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </div>
                 <div>
                     <input type='text'
                            className='input_field register_source'
@@ -183,7 +218,7 @@ const Activate = () => {
                     />
                 </div>
                 <div>
-                    <textarea type='text'
+                    <textarea
                            className='input_field register_more_music'
                            value={moreMusic}
                            onChange={e => setMoreMusic(e.target.value)}
@@ -216,12 +251,6 @@ const Activate = () => {
             <button className='register_btn' onClick={register}>
                 Register
             </button>
-            {/* <button
-        className='register_btn register_google'
-        onClick={signInWithGoogle}
-      >
-        Register with Google
-      </button> */}
         </div>
     );
 };
