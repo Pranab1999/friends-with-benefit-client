@@ -156,11 +156,11 @@ const Account = () => {
                             </li>
                             <li className="detail user_offers" style={{display: 'flex'}}>
                                 <h5>Receive special offers from select Sea FM advertisers</h5>
-                                <p>{offers}</p>
+                                <p>{offers ? 'Yes' : 'No'}</p>
                             </li>
                             <li className="detail user_subscription" style={{display: 'flex'}}>
                                 <h5>Receive Sea FM Friends With Benefits newsletter</h5>
-                                <p>{newsletterSubscription}</p>
+                                <p>{newsletterSubscription ? 'Yes' : 'No'}</p>
                             </li>
                         </ul>
                     </div>

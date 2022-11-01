@@ -75,8 +75,6 @@ const Update = () => {
             setNewsletterSubscription(data.newsletter);
             setOffers(data.advertisers_offers);
 
-            console.log(data)
-
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching user data");
@@ -89,7 +87,8 @@ const Update = () => {
             const res = await getDocs(q);
             console.log(res);
             res.forEach( (user) => {
-                const getUser = doc(db, "users", user.id);
+                const getUser = doc(db, "fwb_entries", user.id);
+                console.log(getUser)
                  updateDoc(getUser, {
                      first_name: firstName,
                      last_name: lastName,
@@ -109,7 +108,7 @@ const Update = () => {
             alert("An error occurred while updating user data");
         }
 
-        return window.location.href = "/";
+        return window.location.href = "/account";
     };
 
     const processListenGroupState = () => {
@@ -170,37 +169,37 @@ const Update = () => {
                 <div className="edit_fields">
                     <div className={"edit edit_first_name"}>
                         <label>First Name
-                            <input type={"text"} name={"first_name"} value={firstName}/>
+                            <input type={"text"} name={"first_name"} value={firstName} onChange={e => setFirstName(e.target.value)}/>
                         </label>
                     </div>
                     <div className={"edit edit_last_name"}>
                         <label>
                             Last Name
-                            <input type={"text"} name={"last_name"} value={lastName}/>
+                            <input type={"text"} name={"last_name"} value={lastName} onChange={e => setLastName(e.target.value)}/>
                         </label>
                     </div>
                     <div className={"edit edit_phone"}>
                         <label>
                             Last Name
-                            <input type={"text"} name={"last_name"} value={phone}/>
+                            <input type={"text"} name={"last_name"} value={phone} onChange={e => setPhone(e.target.value)}/>
                         </label>
                     </div>
                     <div className={"edit edit_street"}>
                         <label>
                             Street Address
-                            <input type={"text"} name={"street"} value={street}/>
+                            <input type={"text"} name={"street"} value={street} onChange={e => setStreet(e.target.value)}/>
                         </label>
                     </div>
                     <div className={"edit edit_suburb"}>
                         <label>
                             Town/Suburb
-                            <input type={"text"} name={"suburb"} value={suburb}/>
+                            <input type={"text"} name={"suburb"} value={suburb} onChange={e => setSuburb(e.target.value)}/>
                         </label>
                     </div>
                     <div className={"edit edit_postcode"}>
                         <label>
                             Postcode
-                            <input type={"text"} name={"postcode"} value={postcode}/>
+                            <input type={"text"} name={"postcode"} value={postcode} onChange={e => setPostcode(e.target.value)}/>
                         </label>
                     </div>
                     <div className={"edit edit_gender"} onChange={onChangeGender}>
@@ -211,12 +210,15 @@ const Update = () => {
                         </label>
                     </div>
                     <div className={"edit edit_age"} onChange={onChangeAgeGroup}>
-                        {ageGroup.map((object, i) =>
-                            <>
-                                <input type="radio" value={object.value} name="age" checked={age === object.value} />{object.label}
-                                <br />
-                            </>
-                        )}
+                        {ageGroup.map((object, i) => {
+                            return (
+                                <li key={i}>
+                                    <input type="radio" value={object.value} name="age"
+                                           checked={age === object.value}/>{object.label}
+                                    <br/>
+                                </li>
+                            );
+                        })}
                     </div>
                     <div className={"edit edit_listen"}>
                         {listenGroup.map(( name , index) => {
@@ -260,6 +262,12 @@ const Update = () => {
                         </label>
                     </div>
                 </div>
+                <button className='update_btn'
+                        onClick={() => updateUserData(
+                            firstName, lastName, phone, street, suburb, postcode, gender, age, listen, newsletterSubscription, offers
+                        )}>
+                    Submit
+                </button>
             </div>
         </div>
     );
