@@ -120,12 +120,14 @@ const updateUserProfile = (displayName, photoUrl) => {
 
 // update user email
 const updateUserEmail = (newEmail) => {
+    console.log(auth.currentUser);
+    console.log(newEmail)
     updateEmail(auth.currentUser, newEmail).then(() => {
         // Email updated!
-        console.log("Email updated!")
+        window.alert("Email updated!")
     }).catch((error) => {
         // An error occurred
-        // ...
+        console.log(error)
     });
 }
 

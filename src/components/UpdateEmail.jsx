@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth, db, updateUserEmail} from "../utils/firebase";
-import {collection, getDocs, query, where} from "firebase/firestore";
+import {collection, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
 
 const UpdateEmail = () => {
 
@@ -19,6 +19,7 @@ const UpdateEmail = () => {
             const q = query(collection(db, "fwb_entries"), where("uid", "==", user?.uid));
             setCurrentUserEmail(user.email)
             // set the initial state for data fetched
+
         } catch (err) {
             console.error(err);
             alert("An error occurred while fetching user data");
@@ -27,10 +28,23 @@ const UpdateEmail = () => {
     };
 
     // handle user email update on both database and user info
-    const updateEmail = (newEmail) => {
-        if(newEmail) {
+    const updateEmail = async (newEmail) => {
+        try {
+            const q = query(collection(db, "fwb_entries"), where("uid", "==", user?.uid));
+            const res = await getDocs(q);
+            res.forEach( (user) => {
+                const getUser = doc(db, "fwb_entries", user.id);
+                updateDoc(getUser, {
+                    email: newEmail
+                });
+            });
+
             updateUserEmail(newEmail);
+
+        } catch (err) {
+            console.log(err);
         }
+        return;
     }
 
     useEffect(() => {
@@ -58,7 +72,9 @@ const UpdateEmail = () => {
               </div>
           </div>
           <div>
-              <button onClick={updateEmail(newUserEmail)}>
+              <button onClick={() => updateEmail(
+                  newUserEmail
+              )}>
                   Change
               </button>
           </div>

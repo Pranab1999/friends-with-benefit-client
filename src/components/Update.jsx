@@ -85,7 +85,6 @@ const Update = () => {
         try {
             const q = query(collection(db, "fwb_entries"), where("uid", "==", user?.uid));
             const res = await getDocs(q);
-            console.log(res);
             res.forEach( (user) => {
                 const getUser = doc(db, "fwb_entries", user.id);
                 console.log(getUser)
