@@ -7,6 +7,9 @@ import Activate from "./components/Activate";
 import Account from "./components/Account";
 import Login from "./components/Login";
 import Update from "./components/Update";
+import UpdateEmail from "./components/UpdateEmail";
+import UpdatePassword from "./components/UpdatePassword";
+
 
 function App() {
   return (
@@ -17,6 +20,8 @@ function App() {
                 <Route exact path='/account' element={<Account />} />
                 <Route exact path='/update' element={<Update />} />
                 <Route exact path='/activate-key' element={<Activate />} />
+                <Route exact path='/update-email' element={<UpdateEmail />} />
+                <Route exact path='/update-password' element={<UpdatePassword />} />
             </Routes>
         </Router>
     </div>

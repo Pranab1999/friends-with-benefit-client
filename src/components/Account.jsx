@@ -71,11 +71,11 @@ const Account = () => {
     };
 
     const updateEmail = () => {
-        return window.location.href = "/update";
+        return window.location.href = "/update-email";
     };
 
     const updatePassword = () => {
-        return window.location.href = "/update";
+        return window.location.href = "/update-password";
     };
 
     return (

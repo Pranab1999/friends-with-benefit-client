@@ -145,7 +145,6 @@ const logout = () => {
     signOut(auth);
 };
 
-
 // global functions
 export {
     auth,
