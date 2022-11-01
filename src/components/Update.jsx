@@ -29,6 +29,30 @@ const Update = () => {
     const [listen, setListen] = useState([]);
     const [newsletterSubscription, setNewsletterSubscription] = useState(false);
     const [offers, setOffers] = useState(false);
+    const [groupCheckState, setGroupCheckState] = useState([]);
+
+    const ageGroup = [
+        {label: 'Under 10', value: 'under 10'},
+        {label: '10-17', value: '10-17'},
+        {label: '18-24', value: '18-24'},
+        {label: '25-39', value: '25-39'},
+        {label: '40-54', value: '40-54'},
+        {label: '55+', value: '55+'},
+    ];
+
+    const listenGroup = [
+        '107.7 Devonport',
+        '101.7 Burnie',
+        'On the Website',
+        'On the phone app',
+        'At work',
+        'At the gym',
+        'In the car',
+        'On weekdays',
+        'On weekends',
+        'During the day',
+        'At night'
+    ];
 
     const [user, loading, error] = useAuthState(auth);
 
@@ -50,6 +74,8 @@ const Update = () => {
             setListen(data.listen);
             setNewsletterSubscription(data.newsletter);
             setOffers(data.advertisers_offers);
+
+            console.log(data)
 
         } catch (err) {
             console.error(err);
@@ -86,17 +112,154 @@ const Update = () => {
         return window.location.href = "/";
     };
 
+    const processListenGroupState = () => {
+
+        let checklist = [];
+
+        listenGroup.forEach(item => {
+            if(listen.includes(item)) {
+                checklist.push(true);
+            } else {
+                checklist.push(false);
+            }
+        })
+
+        setGroupCheckState(checklist);
+    };
+
+    const onChangeAgeGroup = (event) => {
+        setAge(event.target.value);
+    }
+
+    const onChangeGender = (event) => {
+        setGender(event.target.value);
+    }
+
+    const onListenGroupChange = (position) => {
+        const updatedCheckedState = groupCheckState.map((item, index) =>
+            index === position ? !item : item
+        );
+
+        let newListenGroup = [];
+
+        setGroupCheckState(updatedCheckedState);
+
+        updatedCheckedState.forEach(
+            ( currentState, index) => {
+                if (currentState === true) {
+                    newListenGroup.push(listenGroup[index]);
+                }
+            }
+        );
+
+        setListen(newListenGroup);
+    };
+
 
     useEffect(() => {
         if (loading) return;
         if (!user) return window.location.href = "/";
         fetchUserData();
+        processListenGroupState();
     }, [user, loading]);
 
     return (
         <div className='edit'>
             <div className='edit_container'>
-
+                <h3>Edit Your Details</h3>
+                <div className="edit_fields">
+                    <div className={"edit edit_first_name"}>
+                        <label>First Name
+                            <input type={"text"} name={"first_name"} value={firstName}/>
+                        </label>
+                    </div>
+                    <div className={"edit edit_last_name"}>
+                        <label>
+                            Last Name
+                            <input type={"text"} name={"last_name"} value={lastName}/>
+                        </label>
+                    </div>
+                    <div className={"edit edit_phone"}>
+                        <label>
+                            Last Name
+                            <input type={"text"} name={"last_name"} value={phone}/>
+                        </label>
+                    </div>
+                    <div className={"edit edit_street"}>
+                        <label>
+                            Street Address
+                            <input type={"text"} name={"street"} value={street}/>
+                        </label>
+                    </div>
+                    <div className={"edit edit_suburb"}>
+                        <label>
+                            Town/Suburb
+                            <input type={"text"} name={"suburb"} value={suburb}/>
+                        </label>
+                    </div>
+                    <div className={"edit edit_postcode"}>
+                        <label>
+                            Postcode
+                            <input type={"text"} name={"postcode"} value={postcode}/>
+                        </label>
+                    </div>
+                    <div className={"edit edit_gender"} onChange={onChangeGender}>
+                        <label>
+                            Gender
+                            <input type="radio" value="Male" name="gender" checked={gender === "Male"} /> Male
+                            <input type="radio" value="Female" name="gender" checked={gender === "Female"}/> Female
+                        </label>
+                    </div>
+                    <div className={"edit edit_age"} onChange={onChangeAgeGroup}>
+                        {ageGroup.map((object, i) =>
+                            <>
+                                <input type="radio" value={object.value} name="age" checked={age === object.value} />{object.label}
+                                <br />
+                            </>
+                        )}
+                    </div>
+                    <div className={"edit edit_listen"}>
+                        {listenGroup.map(( name , index) => {
+                            return (
+                                <li key={index}>
+                                    <div className="">
+                                        <div className="">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name}
+                                                value={name}
+                                                defaultChecked={groupCheckState[index]}
+                                                onChange={() => onListenGroupChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                        </div>
+                                    </div>
+                                </li>
+                            );
+                        })}
+                    </div>
+                    <div className={"edit edit_newsletter"}>
+                        <label>
+                            Yes, I'd like to receive special offers from select Sea FM advertisers (we won't bombard you)
+                            <input type='checkbox'
+                                   className='register_newsletter'
+                                   defaultChecked={newsletterSubscription}
+                                   onChange={() => setNewsletterSubscription(!newsletterSubscription)}
+                            />
+                        </label>
+                    </div>
+                    <div className={"edit edit_offers"}>
+                        <label>
+                            Yes, sign me up to the Sea FM Friends With Benefits newsletter to be first to hear about benefits!
+                            <input type='checkbox'
+                                   className='register_offers'
+                                   defaultChecked={offers}
+                                   onChange={() => setOffers(!offers)}
+                            />
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     );

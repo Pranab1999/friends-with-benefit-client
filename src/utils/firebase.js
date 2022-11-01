@@ -122,7 +122,7 @@ const updateUserProfile = (displayName, photoUrl) => {
 const updateUserEmail = (newEmail) => {
     updateEmail(auth.currentUser, newEmail).then(() => {
         // Email updated!
-        // ...
+        console.log("Email updated!")
     }).catch((error) => {
         // An error occurred
         // ...
@@ -133,6 +133,7 @@ const updateUserEmail = (newEmail) => {
 const updateUserPassword = (newPassword) => {
     updatePassword(auth.currentUser, newPassword).then(() => {
         // Update successful.
+        console.log("Password updated!")
     }).catch((error) => {
         // An error occurred
         // ...
@@ -152,5 +153,7 @@ export {
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
     sendPasswordReset,
+    updateUserEmail,
+    updateUserPassword,
     logout,
 };
