@@ -133,12 +133,14 @@ const updateUserEmail = (newEmail) => {
 
 // update user password
 const updateUserPassword = (newPassword) => {
+    console.log(newPassword)
     updatePassword(auth.currentUser, newPassword).then(() => {
         // Update successful.
-        console.log("Password updated!")
+        window.alert("Password updated!")
     }).catch((error) => {
         // An error occurred
         // ...
+        console.log(error)
     });
 }
 
