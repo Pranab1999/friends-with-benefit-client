@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { auth, logInWithEmailAndPassword } from "../utils/firebase.js";
+import { auth, logInWithEmailAndPassword, sendPasswordReset} from "../utils/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 
@@ -22,13 +22,20 @@ const Login = () => {
     return (
         <div className='login'>
             <div className='login_container'>
-                <p>
-                    You must be logged in to view this page. Please login using the form
-                    below, or <a href='/activate-key'>join now.</a>
-                </p>
+                <div className={'login_title'}>
+                    <h2 className={'text-3xl font-bold underline'}>Login</h2>
+                </div>
+                <div className={'login_description'}>
+                    <p>
+                        Login to your account to manage your personal details, including email address.
+
+                        Click on Lost Password if you want to set a new password.
+
+                    </p>
+                </div>
                 <div className='login_field'>
                     <div className='field'>
-                        <label>Email Address</label>
+                        <label>Key Tag number or Email address</label>
                         <input
                             type='text'
                             className='login_textBox'
@@ -49,13 +56,21 @@ const Login = () => {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className='login_btn'
-                        onClick={() => logInWithEmailAndPassword(email, password)}
-                    >
-                        Login
-                    </button>
+                    <div className={'login_cta'}>
+                        <button
+                            className='login_btn'
+                            onClick={() => logInWithEmailAndPassword(email, password)}
+                        >
+                            Login
+                        </button>
+
+                        <button
+                            className='reset_btn'
+                            onClick={() => sendPasswordReset(email)}
+                        >
+                            Lost Password?
+                        </button>
+                    </div>
 
                 </div>
             </div>
