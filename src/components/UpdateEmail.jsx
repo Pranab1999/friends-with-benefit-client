@@ -39,7 +39,7 @@ const UpdateEmail = () => {
                 });
             });
 
-            updateUserEmail(newEmail);
+             updateUserEmail(newEmail);
 
         } catch (err) {
             console.log(err);

@@ -17,20 +17,6 @@ import "./Update.scss";
 
 const Update = () => {
 
-    // details tp update
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [street, setStreet] = useState("");
-    const [suburb, setSuburb] = useState("");
-    const [postcode, setPostcode] = useState("");
-    const [gender, setGender] = useState("");
-    const [age, setAge] = useState("");
-    const [listen, setListen] = useState([]);
-    const [newsletterSubscription, setNewsletterSubscription] = useState(false);
-    const [offers, setOffers] = useState(false);
-    const [groupCheckState, setGroupCheckState] = useState([]);
-
     const ageGroup = [
         {label: 'Under 10', value: 'under 10'},
         {label: '10-17', value: '10-17'},
@@ -53,6 +39,20 @@ const Update = () => {
         'During the day',
         'At night'
     ];
+
+    // details to update
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [street, setStreet] = useState("");
+    const [suburb, setSuburb] = useState("");
+    const [postcode, setPostcode] = useState("");
+    const [gender, setGender] = useState("");
+    const [age, setAge] = useState("");
+    const [listen, setListen] = useState([]);
+    const [newsletterSubscription, setNewsletterSubscription] = useState(false);
+    const [offers, setOffers] = useState(false);
+    const [groupCheckState, setGroupCheckState] = useState(new Array(listenGroup.length).fill(false));
 
     const [user, loading, error] = useAuthState(auth);
 
@@ -87,7 +87,6 @@ const Update = () => {
             const res = await getDocs(q);
             res.forEach( (user) => {
                 const getUser = doc(db, "fwb_entries", user.id);
-                console.log(getUser)
                  updateDoc(getUser, {
                      first_name: firstName,
                      last_name: lastName,
@@ -153,7 +152,6 @@ const Update = () => {
         setListen(newListenGroup);
     };
 
-
     useEffect(() => {
         if (loading) return;
         if (!user) return window.location.href = "/";
@@ -201,18 +199,19 @@ const Update = () => {
                             <input type={"text"} name={"postcode"} value={postcode} onChange={e => setPostcode(e.target.value)}/>
                         </label>
                     </div>
-                    <div className={"edit edit_gender"} onChange={onChangeGender}>
+                    <div className={"edit edit_gender"}>
                         <label>
                             Gender
-                            <input type="radio" value="Male" name="gender" checked={gender === "Male"} /> Male
-                            <input type="radio" value="Female" name="gender" checked={gender === "Female"}/> Female
+                            <input type="radio" value="Male" name="gender" onChange={onChangeGender} checked={gender === "Male"} /> Male
+                            <input type="radio" value="Female" name="gender" onChange={onChangeGender} checked={gender === "Female"}/> Female
                         </label>
                     </div>
-                    <div className={"edit edit_age"} onChange={onChangeAgeGroup}>
+                    <div className={"edit edit_age"}>
                         {ageGroup.map((object, i) => {
                             return (
                                 <li key={i}>
                                     <input type="radio" value={object.value} name="age"
+                                           onChange={onChangeAgeGroup}
                                            checked={age === object.value}/>{object.label}
                                     <br/>
                                 </li>
@@ -223,19 +222,15 @@ const Update = () => {
                         {listenGroup.map(( name , index) => {
                             return (
                                 <li key={index}>
-                                    <div className="">
-                                        <div className="">
-                                            <input
-                                                type="checkbox"
-                                                id={`custom-checkbox-${index}`}
-                                                name={name}
-                                                value={name}
-                                                defaultChecked={groupCheckState[index]}
-                                                onChange={() => onListenGroupChange(index)}
-                                            />
-                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-                                        </div>
-                                    </div>
+                                    <input
+                                        type="checkbox"
+                                        id={`custom-checkbox-${index}`}
+                                        name={name}
+                                        value={name}
+                                        checked={groupCheckState[index]}
+                                        onChange={() => onListenGroupChange(index)}
+                                    />
+                                    <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
                                 </li>
                             );
                         })}
@@ -245,7 +240,7 @@ const Update = () => {
                             Yes, I'd like to receive special offers from select Sea FM advertisers (we won't bombard you)
                             <input type='checkbox'
                                    className='register_newsletter'
-                                   defaultChecked={newsletterSubscription}
+                                   checked={newsletterSubscription}
                                    onChange={() => setNewsletterSubscription(!newsletterSubscription)}
                             />
                         </label>
@@ -255,7 +250,7 @@ const Update = () => {
                             Yes, sign me up to the Sea FM Friends With Benefits newsletter to be first to hear about benefits!
                             <input type='checkbox'
                                    className='register_offers'
-                                   defaultChecked={offers}
+                                   checked={offers}
                                    onChange={() => setOffers(!offers)}
                             />
                         </label>

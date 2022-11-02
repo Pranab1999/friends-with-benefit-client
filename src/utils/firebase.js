@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore , query, getDocs, collection, where,addDoc, doc} from "firebase/firestore";
+import { getFirestore , collection ,addDoc} from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // firebase auth services
@@ -120,33 +120,40 @@ const updateUserProfile = (displayName, photoUrl) => {
 
 // update user email
 const updateUserEmail = (newEmail) => {
-    console.log(auth.currentUser);
-    console.log(newEmail)
+
     updateEmail(auth.currentUser, newEmail).then(() => {
         // Email updated!
         window.alert("Email updated!")
+        return true;
     }).catch((error) => {
         // An error occurred
         console.log(error)
+        return false;
     });
 }
 
 // update user password
 const updateUserPassword = (newPassword) => {
-    console.log(newPassword)
+
     updatePassword(auth.currentUser, newPassword).then(() => {
         // Update successful.
         window.alert("Password updated!")
+        return true;
     }).catch((error) => {
         // An error occurred
         // ...
         console.log(error)
+        return false;
     });
 }
 
 // logout
 const logout = () => {
-    signOut(auth);
+    signOut(auth).then(r => {
+        // Success
+    }).catch((err) => {
+        console.log(err)
+    });
 };
 
 // global functions
@@ -158,5 +165,6 @@ export {
     sendPasswordReset,
     updateUserEmail,
     updateUserPassword,
+    updateUserProfile,
     logout,
 };
