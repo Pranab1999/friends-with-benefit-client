@@ -58,7 +58,7 @@ const UpdateEmail = () => {
       <div className="container">
         <div className="wrapper flex flex-col space-y-2 text-left">
             <div className="page_title text-2xl font-bold">
-                <h2>Change Email Address</h2>
+                <h3>Change Email Address</h3>
             </div>
             <div className="email_details">
                 <div className="edit">

@@ -43,7 +43,7 @@ const UpdatePassword = () => {
         <div className="container">
             <div className="wrapper flex flex-col space-y-2 text-left">
                 <div className="page_title text-2xl font-bold">
-                    <h2>Update Password</h2>
+                    <h3>Update Password</h3>
                 </div>
                 <div className="password_details">
                     <div className="edit">
