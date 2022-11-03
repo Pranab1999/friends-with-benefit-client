@@ -40,19 +40,29 @@ const UpdatePassword = () => {
 
 
     return (
-        <div className={"container mx-auto"}>
-            <div>
-                <label>
-                    New Password
-                    <input type={'text'} value={newUserPass} onChange={e => setNewUserPass(e.target.value)}/>
-                </label>
+        <div className="container">
+            <div className="wrapper flex flex-col space-y-2 text-left">
+                <div className="page_title text-2xl font-bold">
+                    <h2>Update Password</h2>
+                </div>
+                <div className="password_details">
+                    <div className="edit">
+                        <label>New Password</label>
+                        <input type='text' value={newUserPass} onChange={e => setNewUserPass(e.target.value)}/>   
+                    </div>            
+                </div>
+                <div className="page_options flex flex-row space-x-1">
+                    <button className='update_btn login_btn button text-white border-2 bg-btn-green px-3 py-2 last:rounded ' onClick={() => updatePassword(
+                        newUserPass
+                    )}>
+                        Update Password
+                    </button>
+                    <button className='cacnel_btn login_btn button text-white border-2 bg-btn-red px-3 py-2 last:rounded '
+                            onClick={() => window.location.href = '/account'}>
+                        Cancel
+                    </button>
+                </div>
             </div>
-
-            <button onClick={() => updatePassword(
-                newUserPass
-            )}>
-                Update
-            </button>
         </div>
     );
 }

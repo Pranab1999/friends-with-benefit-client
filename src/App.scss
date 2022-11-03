@@ -1,3 +1,16 @@
 .App {
   text-align: center;
 }
+
+.edit {
+  @apply flex flex-col;
+
+  label {
+      @apply text-sm font-bold;
+  }
+
+  input[type='text'] {
+      @apply form-input rounded;
+  }
+
+}

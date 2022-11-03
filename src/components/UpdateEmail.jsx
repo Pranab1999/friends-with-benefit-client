@@ -55,29 +55,36 @@ const UpdateEmail = () => {
 
 
     return (
-      <div className={"container mx-auto"}>
-          <div className={"email_details"}>
-              <div>
-                  <label>
-                      Current Email Address
-                      <input className={"current_email"} value={currentUserEmail} readOnly/>
-                  </label>
-              </div>
+      <div className="container">
+        <div className="wrapper flex flex-col space-y-2 text-left">
+            <div className="page_title text-2xl font-bold">
+                <h2>Change Email Address</h2>
+            </div>
+            <div className="email_details">
+                <div className="edit">
+                    <label>Current email address</label>
+                    <input type='text' className="current_email" value={currentUserEmail} readOnly/>
+                    
+                </div>
 
-              <div>
-                  <label>
-                      New Email Address
-                      <input  type={'text'} className={"new_email"} value={newUserEmail} onChange={e => setNewUserEmail(e.target.value)}/>
-                  </label>
-              </div>
-          </div>
-          <div>
-              <button onClick={() => updateEmail(
-                  newUserEmail
-              )}>
-                  Change
-              </button>
-          </div>
+                <div className="edit">
+                    <label>Email address to change to</label>
+                    <input type='text' className="new_email" value={newUserEmail} onChange={e => setNewUserEmail(e.target.value)}/>
+                </div>
+            </div>
+            <div className="page_options flex flex-row space-x-1">
+                <button className='update_btn login_btn button text-white border-2 bg-btn-green px-3 py-2 last:rounded '
+                    onClick={() => updateEmail(
+                        newUserEmail
+                    )}>
+                    Submit
+                </button>
+                <button className='cacnel_btn login_btn button text-white border-2 bg-btn-red px-3 py-2 last:rounded '
+                            onClick={() => window.location.href = '/account'}>
+                        Cancel
+                </button>
+            </div>
+            </div>
       </div>
     );
 }
