@@ -110,147 +110,155 @@ const Activate = () => {
     };
 
     return (
-        <div className='container mx-auto register'>
-            <div className='register_container'>
-                <div>
-                    <input type='text'
-                           className='input_field register_tag'
-                           value={tag}
-                           onChange={e => setTag(e.target.value)}
-                           placeholder={'Tag'}
-                    />
+        <div className='container register'>
+            <div className="wrapper flex flex-col space-y-2 text-left">
+                <div className="page_title text-2xl font-bold">
+                    <h2>Activate your Key Tag</h2>
                 </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_firstname'
-                           value={firstName}
-                           onChange={e => setFirstName(e.target.value)}
-                           placeholder={'First Name'}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_lastname'
-                           value={lastName}
-                           onChange={e => setLastName(e.target.value)}
-                           placeholder={'Last Name'}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_phone'
-                           value={phone}
-                           onChange={e => setPhone(e.target.value)}
-                           placeholder={'Phone'}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_email'
-                           value={email}
-                           onChange={e => setEmail(e.target.value)}
-                           placeholder={'Email'}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_street'
-                           value={street}
-                           onChange={e => setStreet(e.target.value)}
-                           placeholder={'Street'}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_suburb'
-                           value={suburb}
-                           onChange={e => setSuburb(e.target.value)}
-                           placeholder={'Town/Suburb'}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_postcode'
-                           value={postcode}
-                           onChange={e => setPostcode(e.target.value)}
-                           placeholder={'Postcode'}
-                    />
-                </div>
-                <div onChange={onChangeGender}>
-                    <input type="radio" value="Male" name="gender" checked={gender === "Male"} /> Male
-                    <input type="radio" value="Female" name="gender" checked={gender === "Female"}/> Female
-                </div>
-                <div onChange={onChangeAgeGroup}>
-                    {ageGroup.map((object, i) =>
-                        <>
-                            <input type="radio" value={object.value} name="age" checked={age === object.value} />{object.label}
-                            <br />
-                        </>
-                    )}
-                </div>
-                <div className="">
-                    {listenGroup.map(( name , index) => {
-                        return (
-                            <li key={index}>
-                                <div className="">
+                <div className='register_container'>
+                    <div className='field flex flex-col'>
+                        <label className='text-sm font-bold'>Enter your five-digit key tag number</label>
+                        <input type='text'
+                               className='input_field register_tag form-input rounded'
+                               value={tag}
+                               onChange={e => setTag(e.target.value)}
+                               placeholder={'Tag'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_firstname'
+                               value={firstName}
+                               onChange={e => setFirstName(e.target.value)}
+                               placeholder={'First Name'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_lastname'
+                               value={lastName}
+                               onChange={e => setLastName(e.target.value)}
+                               placeholder={'Last Name'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_phone'
+                               value={phone}
+                               onChange={e => setPhone(e.target.value)}
+                               placeholder={'Phone'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_email'
+                               value={email}
+                               onChange={e => setEmail(e.target.value)}
+                               placeholder={'Email'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_street'
+                               value={street}
+                               onChange={e => setStreet(e.target.value)}
+                               placeholder={'Street'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_suburb'
+                               value={suburb}
+                               onChange={e => setSuburb(e.target.value)}
+                               placeholder={'Town/Suburb'}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_postcode'
+                               value={postcode}
+                               onChange={e => setPostcode(e.target.value)}
+                               placeholder={'Postcode'}
+                        />
+                    </div>
+                    <div onChange={onChangeGender}>
+                        <input type="radio" value="Male" name="gender" checked={gender === "Male"} /> Male
+                        <input type="radio" value="Female" name="gender" checked={gender === "Female"}/> Female
+                    </div>
+                    <div onChange={onChangeAgeGroup}>
+                        {ageGroup.map((object, i) =>
+                            <>
+                                <input type="radio" value={object.value} name="age" checked={age === object.value} />{object.label}
+                                <br />
+                            </>
+                        )}
+                    </div>
+                    <div className="">
+                        {listenGroup.map(( name , index) => {
+                            return (
+                                <li key={index}>
                                     <div className="">
-                                        <input
-                                            type="checkbox"
-                                            id={`custom-checkbox-${index}`}
-                                            name={name}
-                                            value={name}
-                                            checked={groupCheckState[index]}
-                                            onChange={() => onListenGroupChange(index)}
-                                        />
-                                        <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                        <div className="">
+                                            <input
+                                                type="checkbox"
+                                                id={`custom-checkbox-${index}`}
+                                                name={name}
+                                                value={name}
+                                                checked={groupCheckState[index]}
+                                                onChange={() => onListenGroupChange(index)}
+                                            />
+                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        );
-                    })}
+                                </li>
+                            );
+                        })}
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_source'
+                               value={tagSource}
+                               onChange={e => setTagSource(e.target.value)}
+                               placeholder={''}
+                        />
+                    </div>
+                    <div>
+                        <textarea
+                               className='input_field register_more_music'
+                               value={moreMusic}
+                               onChange={e => setMoreMusic(e.target.value)}
+                               placeholder={''}
+                        />
+                    </div>
+                    <div>
+                        <input type='checkbox'
+                               className='input_field register_newsletter'
+                               defaultChecked={newsletterSubscription}
+                               onChange={() => setNewsletterSubscription(!newsletterSubscription)}
+                        />
+                    </div>
+                    <div>
+                        <input type='checkbox'
+                               className='input_field register_offers'
+                               defaultChecked={offers}
+                               onChange={() => setOffers(!offers)}
+                        />
+                    </div>
+                    <div>
+                        <input type='text'
+                               className='input_field register_password'
+                               value={password}
+                               onChange={e => setPassword(e.target.value)}
+                               placeholder={'Password'}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_source'
-                           value={tagSource}
-                           onChange={e => setTagSource(e.target.value)}
-                           placeholder={''}
-                    />
-                </div>
-                <div>
-                    <textarea
-                           className='input_field register_more_music'
-                           value={moreMusic}
-                           onChange={e => setMoreMusic(e.target.value)}
-                           placeholder={''}
-                    />
-                </div>
-                <div>
-                    <input type='checkbox'
-                           className='input_field register_newsletter'
-                           defaultChecked={newsletterSubscription}
-                           onChange={() => setNewsletterSubscription(!newsletterSubscription)}
-                    />
-                </div>
-                <div>
-                    <input type='checkbox'
-                           className='input_field register_offers'
-                           defaultChecked={offers}
-                           onChange={() => setOffers(!offers)}
-                    />
-                </div>
-                <div>
-                    <input type='text'
-                           className='input_field register_password'
-                           value={password}
-                           onChange={e => setPassword(e.target.value)}
-                           placeholder={'Password'}
-                    />
+                <div className="page_options flex flex-row space-x-1">
+                    <button className='register_btn' onClick={register}>
+                        Register
+                    </button>
                 </div>
             </div>
-            <button className='register_btn' onClick={register}>
-                Register
-            </button>
         </div>
     );
 };
