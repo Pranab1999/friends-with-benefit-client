@@ -115,17 +115,18 @@ const Activate = () => {
                 <div className="page_title text-2xl font-bold">
                     <h2>Activate your Key Tag</h2>
                 </div>
-                <div className='register_container'>
-                    <div className='field flex flex-col'>
-                        <label className='text-sm font-bold'>Enter your five-digit key tag number</label>
+                <div className='register_container space-y-2'>
+                    <div className='field'>
+                        <label>Enter your five-digit key tag number</label>
                         <input type='text'
-                               className='input_field register_tag form-input rounded'
+                               className='input_field register_tag'
                                value={tag}
                                onChange={e => setTag(e.target.value)}
                                placeholder={'Tag'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>First Name</label>
                         <input type='text'
                                className='input_field register_firstname'
                                value={firstName}
@@ -133,7 +134,8 @@ const Activate = () => {
                                placeholder={'First Name'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Last Name</label>
                         <input type='text'
                                className='input_field register_lastname'
                                value={lastName}
@@ -141,7 +143,8 @@ const Activate = () => {
                                placeholder={'Last Name'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Phone</label>
                         <input type='text'
                                className='input_field register_phone'
                                value={phone}
@@ -149,7 +152,8 @@ const Activate = () => {
                                placeholder={'Phone'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Email</label>
                         <input type='text'
                                className='input_field register_email'
                                value={email}
@@ -157,7 +161,8 @@ const Activate = () => {
                                placeholder={'Email'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Street Address</label>
                         <input type='text'
                                className='input_field register_street'
                                value={street}
@@ -165,7 +170,8 @@ const Activate = () => {
                                placeholder={'Street'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Town/Suburb</label>
                         <input type='text'
                                className='input_field register_suburb'
                                value={suburb}
@@ -173,7 +179,8 @@ const Activate = () => {
                                placeholder={'Town/Suburb'}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Postcode</label>
                         <input type='text'
                                className='input_field register_postcode'
                                value={postcode}
@@ -181,40 +188,44 @@ const Activate = () => {
                                placeholder={'Postcode'}
                         />
                     </div>
-                    <div onChange={onChangeGender}>
+                    <div className='field gender' onChange={onChangeGender}>
+                        <label>Gender</label>
                         <input type="radio" value="Male" name="gender" checked={gender === "Male"} /> Male
                         <input type="radio" value="Female" name="gender" checked={gender === "Female"}/> Female
                     </div>
-                    <div onChange={onChangeAgeGroup}>
-                        {ageGroup.map((object, i) =>
-                            <>
-                                <input type="radio" value={object.value} name="age" checked={age === object.value} />{object.label}
-                                <br />
-                            </>
-                        )}
-                    </div>
-                    <div className="">
-                        {listenGroup.map(( name , index) => {
-                            return (
-                                <li key={index}>
-                                    <div className="">
-                                        <div className="">
-                                            <input
-                                                type="checkbox"
-                                                id={`custom-checkbox-${index}`}
-                                                name={name}
-                                                value={name}
-                                                checked={groupCheckState[index]}
-                                                onChange={() => onListenGroupChange(index)}
-                                            />
-                                            <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-                                        </div>
-                                    </div>
+                    <div className='field age'onChange={onChangeAgeGroup}>
+                        <label>Age Group</label>
+                        <ul>
+                            {ageGroup.map((object, i) =>
+                                <li key={i}>
+                                    <input type="radio" value={object.value} name="age" checked={age === object.value} />{object.label}
+                                    <br />
                                 </li>
-                            );
-                        })}
+                            )}
+                        </ul>
                     </div>
-                    <div>
+                    <div className='field listen'>
+                        <label>How do you listen to Sea FM? (tick as many as you wish)</label>
+                        <ul>
+                            {listenGroup.map(( name , index) => {
+                                return (
+                                    <li key={index}>
+                                        <input
+                                            type="checkbox"
+                                            id={`custom-checkbox-${index}`}
+                                            name={name}
+                                            value={name}
+                                            checked={groupCheckState[index]}
+                                            onChange={() => onListenGroupChange(index)}
+                                        />
+                                        <label className="checkbox" htmlFor={`custom-checkbox-${index}`}>{name}</label>       
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                    <div className='field'>
+                        <label>Where did you get your Sea FM key tag from?</label>
                         <input type='text'
                                className='input_field register_source'
                                value={tagSource}
@@ -222,7 +233,8 @@ const Activate = () => {
                                placeholder={''}
                         />
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>What music would you like hear more of?</label>
                         <textarea
                                className='input_field register_more_music'
                                value={moreMusic}
@@ -230,21 +242,27 @@ const Activate = () => {
                                placeholder={''}
                         />
                     </div>
-                    <div>
+                    <div className='field newsletter'>
                         <input type='checkbox'
+                               name='newsletter'
                                className='input_field register_newsletter'
                                defaultChecked={newsletterSubscription}
                                onChange={() => setNewsletterSubscription(!newsletterSubscription)}
                         />
+                        <label htmlFor="newsletter" className="checkbox">Yes, sign me up to the Sea FM Friends With Benefits newsletter to be first to hear about benefits!</label>
+
                     </div>
-                    <div>
+                    <div className='field offers'>
                         <input type='checkbox'
+                               name='offers'
                                className='input_field register_offers'
                                defaultChecked={offers}
                                onChange={() => setOffers(!offers)}
                         />
+                        <label htmlFor="offers" className="checkbox">Yes, I'd like to receive special offers from select Sea FM advertisers (we won't bombard you)</label>
                     </div>
-                    <div>
+                    <div className='field'>
+                        <label>Password</label>
                         <input type='text'
                                className='input_field register_password'
                                value={password}
@@ -254,8 +272,8 @@ const Activate = () => {
                     </div>
                 </div>
                 <div className="page_options flex flex-row space-x-1">
-                    <button className='register_btn' onClick={register}>
-                        Register
+                    <button className='register_btn login_btn button text-white border-2 bg-btn-green px-3 py-2 last:rounded ' onClick={register}>
+                        Activate Now!
                     </button>
                 </div>
             </div>

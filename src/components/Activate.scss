@@ -1,0 +1,65 @@
+.register {
+    .register_container {
+        .field {
+            @apply flex flex-col;
+
+            label {
+                @apply text-sm font-bold;
+            }
+
+            input[type='text'] {
+                @apply form-input rounded;
+            }
+
+        }
+
+        .field.gender {
+            flex-direction: row;
+            align-items: center;
+
+            label{
+                margin-right: 10px;
+            }
+
+            input[type='radio'] {
+                margin: 0px 5px;
+            }
+        }
+
+        .field.age{
+            flex-direction: column;
+
+            label{
+                margin-right: 10px;
+            }
+
+            input[type='radio'] {
+                margin: 0px 5px;
+            }
+        }
+
+        .field.listen{
+            input[type='checkbox'] { 
+                @apply mr-2;
+            }
+
+            label.checkbox{
+                font-weight: 500;
+            }
+        }
+
+        .field.newsletter , .field.offers{ 
+        
+            flex-direction: row;
+            align-items: center;
+
+            input[type='checkbox'] { 
+                @apply mr-2;
+            }
+
+            label.checkbox{
+                font-weight: 500;
+            }
+        }
+    }
+}
