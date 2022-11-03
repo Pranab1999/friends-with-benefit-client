@@ -1,0 +1,65 @@
+.edit {
+    .edit_fields {
+        .edit {
+            @apply flex flex-col;
+
+            label {
+                @apply text-sm font-bold;
+            }
+
+            input[type='text'] {
+                @apply form-input rounded;
+            }
+
+        }
+
+        .edit.edit_gender {
+            flex-direction: row;
+            align-items: center;
+
+            label{
+                margin-right: 10px;
+            }
+
+            input[type='radio'] {
+                margin: 0px 5px;
+            }
+        }
+
+        .edit.edit_age{
+            flex-direction: column;
+
+            label{
+                margin-right: 10px;
+            }
+
+            input[type='radio'] {
+                margin: 0px 5px;
+            }
+        }
+
+        .edit.edit_listen{
+            input[type='checkbox'] { 
+                @apply mr-2;
+            }
+
+            label.checkbox_label{
+                font-weight: 500;
+            }
+        }
+
+        .edit.edit_newsletter , .edit.edit_offers{ 
+        
+            flex-direction: row;
+            align-items: center;
+
+            input[type='checkbox'] { 
+                @apply mr-2;
+            }
+
+            label.checkbox_label{
+                font-weight: 500;
+            }
+        }
+    }
+}

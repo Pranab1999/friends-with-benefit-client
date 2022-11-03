@@ -160,108 +160,112 @@ const Update = () => {
     }, [user, loading]);
 
     return (
-        <div className='container mx-auto edit'>
-            <div className='edit_container'>
-                <h3>Edit Your Details</h3>
-                <div className="edit_fields">
-                    <div className={"edit edit_first_name"}>
-                        <label>First Name
-                            <input type={"text"} name={"first_name"} value={firstName} onChange={e => setFirstName(e.target.value)}/>
-                        </label>
+        <div className='container edit'>
+            <div className='wrapper flex flex-col space-y-2 text-left'>
+                <div className="page_title text-2xl font-bold">
+                    <h2>Edit Your Details</h2>
+                </div>
+                <div className="edit_fields space-y-2">
+                    <div className="edit edit_first_name">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
                     </div>
-                    <div className={"edit edit_last_name"}>
-                        <label>
-                            Last Name
-                            <input type={"text"} name={"last_name"} value={lastName} onChange={e => setLastName(e.target.value)}/>
-                        </label>
+                    <div className="edit edit_last_name">
+                        <label>Last Name </label>
+                        <input type="text" name={"last_name"} value={lastName} onChange={e => setLastName(e.target.value)}/>
+                        
                     </div>
-                    <div className={"edit edit_phone"}>
-                        <label>
-                            Last Name
-                            <input type={"text"} name={"last_name"} value={phone} onChange={e => setPhone(e.target.value)}/>
-                        </label>
+                    <div className="edit edit_phone">
+                        <label>Last Name</label>
+                        <input type="text" name={"last_name"} value={phone} onChange={e => setPhone(e.target.value)}/>
+                        
                     </div>
-                    <div className={"edit edit_street"}>
-                        <label>
-                            Street Address
-                            <input type={"text"} name={"street"} value={street} onChange={e => setStreet(e.target.value)}/>
-                        </label>
+                    <div className="edit edit_street">
+                        <label>Street Address</label>
+                        <input type="text" name="street" value={street} onChange={e => setStreet(e.target.value)}/>
+                        
                     </div>
-                    <div className={"edit edit_suburb"}>
-                        <label>
-                            Town/Suburb
-                            <input type={"text"} name={"suburb"} value={suburb} onChange={e => setSuburb(e.target.value)}/>
-                        </label>
+                    <div className="edit edit_suburb">
+                        <label>Town/Suburb</label>
+                        <input type="text" name={"suburb"} value={suburb} onChange={e => setSuburb(e.target.value)}/>
+                        
                     </div>
-                    <div className={"edit edit_postcode"}>
-                        <label>
-                            Postcode
-                            <input type={"text"} name={"postcode"} value={postcode} onChange={e => setPostcode(e.target.value)}/>
-                        </label>
+                    <div className="edit edit_postcode">
+                        <label>Postcode</label>
+                        <input type="text" name={"postcode"} value={postcode} onChange={e => setPostcode(e.target.value)}/>
+                       
                     </div>
-                    <div className={"edit edit_gender"}>
-                        <label>
-                            Gender
-                            <input type="radio" value="Male" name="gender" onChange={onChangeGender} checked={gender === "Male"} /> Male
-                            <input type="radio" value="Female" name="gender" onChange={onChangeGender} checked={gender === "Female"}/> Female
-                        </label>
+                    <div className="edit edit_gender">
+                        <label>Gender</label>
+                        <input type="radio" value="Male" name="gender" onChange={onChangeGender} checked={gender === "Male"} /> Male
+                        <input type="radio" value="Female" name="gender" onChange={onChangeGender} checked={gender === "Female"}/> Female
+                      
                     </div>
-                    <div className={"edit edit_age"}>
-                        {ageGroup.map((object, i) => {
-                            return (
-                                <li key={i}>
-                                    <input type="radio" value={object.value} name="age"
-                                           onChange={onChangeAgeGroup}
-                                           checked={age === object.value}/>{object.label}
-                                    <br/>
-                                </li>
-                            );
-                        })}
+                    <div className="edit edit_age">
+                        <label>Age Group</label>
+                        <ul>
+                            {ageGroup.map((object, i) => {
+                                return (
+                                    <li key={i}>
+                                        <input type="radio" value={object.value} name="age"
+                                            onChange={onChangeAgeGroup}
+                                            checked={age === object.value}/>{object.label}
+                                        <br/>
+                                    </li>
+                                );
+                            })}
+                        </ul>
                     </div>
-                    <div className={"edit edit_listen"}>
-                        {listenGroup.map(( name , index) => {
-                            return (
-                                <li key={index}>
-                                    <input
-                                        type="checkbox"
-                                        id={`custom-checkbox-${index}`}
-                                        name={name}
-                                        value={name}
-                                        checked={groupCheckState[index]}
-                                        onChange={() => onListenGroupChange(index)}
-                                    />
-                                    <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
-                                </li>
-                            );
-                        })}
+                    <div className="edit edit_listen">
+                        <label>How do you listen to Sea FM?</label>
+                        <ul>
+                            {listenGroup.map(( name , index) => {
+                                return (
+                                    <li key={index}>
+                                        <input
+                                            type="checkbox"
+                                            id={`custom-checkbox-${index}`}
+                                            name={name}
+                                            value={name}
+                                            checked={groupCheckState[index]}
+                                            onChange={() => onListenGroupChange(index)}
+                                        />
+                                        <label className="checkbox_label" htmlFor={`custom-checkbox-${index}`}>{name}</label>
+                                    </li>
+                                );
+                            })}
+                        </ul>
                     </div>
-                    <div className={"edit edit_newsletter"}>
-                        <label>
-                            Yes, I'd like to receive special offers from select Sea FM advertisers (we won't bombard you)
+                    <div className="edit edit_newsletter">
                             <input type='checkbox'
                                    className='register_newsletter'
                                    checked={newsletterSubscription}
                                    onChange={() => setNewsletterSubscription(!newsletterSubscription)}
                             />
-                        </label>
+                            <label className="checkbox_label">Yes, I'd like to receive special offers from select Sea FM advertisers (we won't bombard you)</label>
                     </div>
-                    <div className={"edit edit_offers"}>
-                        <label>
-                            Yes, sign me up to the Sea FM Friends With Benefits newsletter to be first to hear about benefits!
+                    <div className="edit edit_offers">
+                        
                             <input type='checkbox'
                                    className='register_offers'
                                    checked={offers}
                                    onChange={() => setOffers(!offers)}
                             />
-                        </label>
+                            <label className="checkbox_label">Yes, sign me up to the Sea FM Friends With Benefits newsletter to be first to hear about benefits!</label>
                     </div>
                 </div>
-                <button className='update_btn'
-                        onClick={() => updateUserData(
-                            firstName, lastName, phone, street, suburb, postcode, gender, age, listen, newsletterSubscription, offers
-                        )}>
-                    Submit
-                </button>
+                <div className="page_options flex flex-row space-x-1">
+                    <button className='update_btn login_btn button text-white border-2 bg-btn-green px-3 py-2 last:rounded '
+                            onClick={() => updateUserData(
+                                firstName, lastName, phone, street, suburb, postcode, gender, age, listen, newsletterSubscription, offers
+                            )}>
+                        Save Details
+                    </button>
+                    <button className='update_btn login_btn button text-white border-2 bg-btn-red px-3 py-2 last:rounded '
+                            onClick={() => window.location.href = '/account'}>
+                        Cancel
+                    </button>
+                </div>
             </div>
         </div>
     );
