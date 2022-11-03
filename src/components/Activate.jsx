@@ -110,7 +110,7 @@ const Activate = () => {
     };
 
     return (
-        <div className='register'>
+        <div className='container mx-auto register'>
             <div className='register_container'>
                 <div>
                     <input type='text'

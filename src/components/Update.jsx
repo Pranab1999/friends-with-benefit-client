@@ -160,7 +160,7 @@ const Update = () => {
     }, [user, loading]);
 
     return (
-        <div className='edit'>
+        <div className='container mx-auto edit'>
             <div className='edit_container'>
                 <h3>Edit Your Details</h3>
                 <div className="edit_fields">

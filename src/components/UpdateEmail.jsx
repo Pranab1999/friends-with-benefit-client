@@ -55,7 +55,7 @@ const UpdateEmail = () => {
 
 
     return (
-      <div className={"container"}>
+      <div className={"container mx-auto"}>
           <div className={"email_details"}>
               <div>
                   <label>

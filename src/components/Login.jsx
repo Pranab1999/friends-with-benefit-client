@@ -20,52 +20,51 @@ const Login = () => {
     }, [user, loading]);
 
     return (
-        <div className='login'>
-            <div className='login_container'>
-                <div className={'login_title'}>
-                    <h2 className={'text-3xl font-bold underline'}>Login</h2>
+        <div className='container login'>
+            <div className='login_container flex flex-col text-left space-y-2.5'>
+                <div className='login_title'>
+                    <h2 className='text-2xl font-bold'>Login</h2>
                 </div>
-                <div className={'login_description'}>
-                    <p>
+                <div className='login_description'>
+                    <p className=''>
                         Login to your account to manage your personal details, including email address.
-
+                        <br/>
                         Click on Lost Password if you want to set a new password.
-
                     </p>
                 </div>
                 <div className='login_field'>
-                    <div className='field'>
-                        <label>Key Tag number or Email address</label>
+                    <div className='field flex flex-col space-y-1.5'>
+                        <label className='text-sm font-bold'>Key Tag number or Email address</label>
                         <input
                             type='text'
-                            className='login_textBox'
+                            className='login_textBox form-input'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder=''
                         />
                     </div>
 
-                    <div className='field'>
-                        <label>Password</label>
+                    <div className='field flex flex-col'>
+                        <label className='text-sm font-bold'>Password</label>
                         <input
                             type='password'
-                            className='login_textBox'
+                            className='login_textBox form-input'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder=''
                         />
                     </div>
 
-                    <div className={'login_cta'}>
+                    <div className='login_cta flex space-x-1.5 mt-4'>
                         <button
-                            className='login_btn'
+                            className='login_btn button border-2 border-rose-600  rounded-sm w-1/2'
                             onClick={() => logInWithEmailAndPassword(email, password)}
                         >
                             Login
                         </button>
 
                         <button
-                            className='reset_btn'
+                            className='reset_btn button border-2 border-rose-600 rounded-sm w-1/2'
                             onClick={() => sendPasswordReset(email)}
                         >
                             Lost Password?

@@ -79,7 +79,7 @@ const Account = () => {
     };
 
     return (
-        <div className="main_container">
+        <div className="container mx-auto main_container">
             <div className="wrapper">
                 <div className="page_title">
                     <h2>My Profile</h2>

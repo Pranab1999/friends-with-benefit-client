@@ -40,7 +40,7 @@ const UpdatePassword = () => {
 
 
     return (
-        <div className={"container"}>
+        <div className={"container mx-auto"}>
             <div>
                 <label>
                     New Password
