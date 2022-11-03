@@ -7,7 +7,13 @@ module.exports = {
     container: {
       center: true,
     },
-    extend: {},
+    extend: {
+      colors: {
+        'btn-green': '#21ba45',
+        'btn-blue': '#2185d0',
+        'light' : '#7a8188',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

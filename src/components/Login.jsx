@@ -26,7 +26,7 @@ const Login = () => {
                     <h2 className='text-2xl font-bold'>Login</h2>
                 </div>
                 <div className='login_description'>
-                    <p className=''>
+                    <p className='text-light'>
                         Login to your account to manage your personal details, including email address.
                         <br/>
                         Click on Lost Password if you want to set a new password.
@@ -37,7 +37,7 @@ const Login = () => {
                         <label className='text-sm font-bold'>Key Tag number or Email address</label>
                         <input
                             type='text'
-                            className='login_textBox form-input'
+                            className='login_textBox form-input rounded'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder=''
@@ -48,7 +48,7 @@ const Login = () => {
                         <label className='text-sm font-bold'>Password</label>
                         <input
                             type='password'
-                            className='login_textBox form-input'
+                            className='login_textBox form-input rounded'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder=''
@@ -57,14 +57,14 @@ const Login = () => {
 
                     <div className='login_cta flex space-x-1.5 mt-4'>
                         <button
-                            className='login_btn button border-2 border-rose-600  rounded-sm w-1/2'
+                            className='login_btn button text-white border-2 bg-btn-green p-1 rounded w-1/2'
                             onClick={() => logInWithEmailAndPassword(email, password)}
                         >
                             Login
                         </button>
 
                         <button
-                            className='reset_btn button border-2 border-rose-600 rounded-sm w-1/2'
+                            className='reset_btn button text-white border-2 bg-btn-blue p-1 rounded w-1/2'
                             onClick={() => sendPasswordReset(email)}
                         >
                             Lost Password?
