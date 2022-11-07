@@ -14,6 +14,16 @@ import UpdatePassword from "./components/UpdatePassword";
 function App() {
   return (
     <div className="App">
+        <div className='container my-4'>
+          <ul className="header flex flex-row justify-center">
+            <li className='nav-buttons'><a href="/about">About</a></li>
+            <li className='nav-buttons'><a href="/benefits">Benefits</a></li>
+            <li className='nav-buttons'><a href="/activate-key">Activate your key tag</a></li>
+            <li className='nav-buttons'><a href="/">My Account</a></li>
+            <li className='nav-buttons'><a href="/where">Where to get a key tag</a></li>
+            <li className='nav-buttons'><a href="/contact">Be a sponsor</a></li>
+          </ul>
+        </div>
         <Router>
             <Routes>
                 <Route exact path='/' element={<Login />} />

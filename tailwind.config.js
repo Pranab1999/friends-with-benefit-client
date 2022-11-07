@@ -13,6 +13,8 @@ module.exports = {
         'btn-blue': '#2185d0',
         'btn-cyan': '#00b5ad',
         'btn-red': '#db2828',
+        'btn-light-blue': '#00aeef',
+        'btn-pink': '#e90088',
         'light' : '#7a8188',
       },
     },
